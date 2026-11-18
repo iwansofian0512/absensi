@@ -1,0 +1,28 @@
+.env
+.env.local
+.env.*.local
+node_modules/
+dist/
+build/
+.next/
+coverage/
+playwright-report/
+test-results/
+context-pack.md
+external-context.md
+
+# Local tooling/caches (sandbox-friendly, never committed)
+.cache/
+.corepack/
+.tools/
+
+# Local database dumps and deploy state
+*.dump
+backups/
+deploy/.env
+deploy/.current_tag
+deploy/.previous_tag
+
+# Playwright artifacts (web/ paths are covered by the generic patterns too)
+web/playwright-report/
+web/test-results/
