@@ -1,5 +1,11 @@
 SHELL := /bin/bash
 
+# Local overrides (gitignored). Plain KEY=value lines, no shell `export`.
+-include .env.local
+ifneq (,$(wildcard .env.local))
+export APP_ENV HTTP_ADDR LOG_LEVEL
+endif
+
 CONTEXT_BASE ?= origin/main
 DATABASE_URL ?= postgres://postgres:postgres@localhost:5432/absensi?sslmode=disable
 COMPOSE_DEV := docker compose -f docker-compose.dev.yml

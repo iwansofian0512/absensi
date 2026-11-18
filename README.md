@@ -15,7 +15,7 @@ React 19 + Vite + TypeScript + TanStack Query · pnpm · Docker Compose + Caddy 
 ## Mulai
 
 ```bash
-cp .env.example .env.local      # isi DATABASE_URL (dev default sudah ada)
+cp .env.example .env.local      # opsional; Makefile membaca file ini (plain KEY=value)
 make db-up                      # Postgres 17 via docker compose
 make migrate-up                 # skema terbaru
 make dev                        # API :8080; GET /health

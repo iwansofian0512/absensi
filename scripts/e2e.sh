@@ -6,6 +6,13 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+if [ -f .env.local ]; then
+	set -a
+	# shellcheck disable=SC1091
+	. ./.env.local
+	set +a
+fi
+
 export DATABASE_URL="${DATABASE_URL:-postgres://postgres:postgres@localhost:5432/absensi?sslmode=disable}"
 
 docker compose -f docker-compose.dev.yml up -d --wait
