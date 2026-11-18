@@ -1,0 +1,14 @@
+# Paths are relative to the location of THIS file (db/), not the repo root.
+# schema: "migrations" points at db/migrations; sqlc skips *.down.sql.
+version: "2"
+sql:
+  - engine: "postgresql"
+    schema: "migrations"
+    queries: "queries"
+    gen:
+      go:
+        package: "store"
+        out: "../internal/store"
+        sql_package: "pgx/v5"
+        emit_json_tags: false
+        emit_prepared_queries: false
