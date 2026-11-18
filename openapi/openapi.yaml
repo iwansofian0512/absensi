@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: Absensi API
+  version: 0.1.0
+  description: |
+    Bootstrap contract for the attendance app. Only the liveness endpoint exists
+    in this slice; authentication, students, attendance, and reports are added
+    in later slices (S0+). This file is the single source of FE types.
+servers:
+  - url: http://localhost:8080
+    description: Local API (Caddy/Vite proxy in front in other environments)
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      summary: Liveness probe
+      description: Returns ok when the API process is running. Does not check the database.
+      responses:
+        "200":
+          description: Process is alive
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
