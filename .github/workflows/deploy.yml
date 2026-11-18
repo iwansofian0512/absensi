@@ -1,0 +1,79 @@
+name: deploy
+
+# Runs only after the full CI workflow succeeds on main.
+on:
+  workflow_run:
+    workflows: ["ci"]
+    types: [completed]
+    branches: [main]
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  build:
+    name: build images (sha + latest)
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: build and push api
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: deploy/Dockerfile
+          target: api
+          push: true
+          tags: |
+            ${{ env.IMAGE }}/api:${{ github.event.workflow_run.head_sha }}
+            ${{ env.IMAGE }}/api:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: build and push web
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: deploy/Dockerfile
+          target: web
+          push: true
+          tags: |
+            ${{ env.IMAGE }}/web:${{ github.event.workflow_run.head_sha }}
+            ${{ env.IMAGE }}/web:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: migrate -> up -> smoke
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: deploy on VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 15m
+          script: |
+            set -eu
+            cd /srv/absensi
+            ./deploy/scripts/deploy.sh "${{ github.event.workflow_run.head_sha }}"

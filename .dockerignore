@@ -1,0 +1,15 @@
+.git
+.github
+.cache
+.corepack
+.tools
+**/node_modules
+web/dist
+web/playwright-report
+web/test-results
+docs
+deploy/.env
+deploy/backups
+*.dump
+context-pack.md
+external-context.md

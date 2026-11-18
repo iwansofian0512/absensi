@@ -1,0 +1,8 @@
+# Static SPA server (internal compose network only).
+# Client-side routes fall back to index.html; the edge Caddy owns TLS/headers.
+:8080 {
+	root * /srv
+	encode zstd gzip
+	try_files {path} /index.html
+	file_server
+}
