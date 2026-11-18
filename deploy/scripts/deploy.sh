@@ -29,6 +29,9 @@ echo "deploying ${TAG} (current: ${CURRENT:-none})"
 
 "${COMPOSE[@]}" pull api web
 
+# First deploy: Postgres must exist before the one-shot migration container.
+"${COMPOSE[@]}" up -d --wait postgres
+
 echo "running migrations as the owner role"
 "${COMPOSE[@]}" run --rm --no-deps --entrypoint /app/migrate \
 	-e DATABASE_URL="$MIGRATE_DATABASE_URL" api up
