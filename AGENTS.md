@@ -1,6 +1,6 @@
 # AGENTS.md — absensi
 
-Go 1.24 (chi, pgx/v5, golang-migrate, sqlc, log/slog) · PostgreSQL 17 · React 19 + Vite + TypeScript · TanStack Query · Playwright
+Go 1.26 (chi, pgx/v5, golang-migrate, sqlc, log/slog) · PostgreSQL 17 · React 19 + Vite + TypeScript · TanStack Query · Playwright
 
 > **Stack dideklarasikan** di `docs/stack.md` (2026-11-18). Kalau stack berubah, ubah di sana
 > lalu sesuaikan bagian Stack di file ini. Jangan biarkan keduanya berbeda.
@@ -27,7 +27,7 @@ Go 1.24 (chi, pgx/v5, golang-migrate, sqlc, log/slog) · PostgreSQL 17 · React 
 
 | Aspek | Nilai |
 |---|---|
-| Bahasa | Go + TypeScript |
+| Bahasa | Go 1.26 + TypeScript |
 | Framework | Go HTTP API (chi) + React (Vite) |
 | Database | PostgreSQL 17 |
 | Hosting | VPS (Docker Compose + Caddy) |

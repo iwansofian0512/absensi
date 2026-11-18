@@ -10,11 +10,14 @@ Satu sekolah, satu VPS, satu backend; kontrak FE↔BE berubah bersamaan.
 
 ## Keputusan
 
-Go 1.24 + chi + pgx/v5 + golang-migrate + sqlc + log/slog · PostgreSQL 17 ·
+Go 1.26 + chi + pgx/v5 + golang-migrate + sqlc + log/slog · PostgreSQL 17 ·
 React 19 + Vite + TypeScript + TanStack Query · pnpm · Docker Compose + Caddy di VPS.
 
 Tooling gate: TypeScript, ESLint, Vitest, Playwright, openapi-typescript, gitleaks, gosec,
 govulncheck. Semuanya dev/CI-only, bukan runtime dependency.
+
+Go 1.26 dipilih saat bootstrap karena `govulncheck` menandai stdlib Go ≤1.25.7; `pgx/v5` 5.9.2
+(perbaikan GO-2026-5004) juga mensyaratkan Go ≥1.25. Versi di-pin di CI dan image build.
 
 ## Alternatif yang ditolak
 

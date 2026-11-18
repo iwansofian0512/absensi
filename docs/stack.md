@@ -3,12 +3,12 @@
 > **Dideklarasikan 2026-11-18.** Ini sumber kebenaran stack. Kalau berubah, ubah file ini
 > lalu sesuaikan bagian Stack di `AGENTS.md` dan perintah di `Makefile`.
 
-Go 1.24 (chi, pgx/v5, golang-migrate, sqlc, log/slog) · PostgreSQL 17 · React 19 + Vite + TypeScript ·
+Go 1.26 (chi, pgx/v5, golang-migrate, sqlc, log/slog) · PostgreSQL 17 · React 19 + Vite + TypeScript ·
 TanStack Query · pnpm · VPS (Docker Compose + Caddy)
 
 | Aspek | Nilai |
 |---|---|
-| Bahasa | Go + TypeScript |
+| Bahasa | Go 1.26 + TypeScript |
 | Framework | Go HTTP API (chi) + React (Vite) |
 | Database | PostgreSQL 17 (pgx/v5, sqlc) |
 | Migrasi | golang-migrate, file embedded, job terpisah |

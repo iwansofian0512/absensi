@@ -8,7 +8,7 @@ CRUD siswa, absensi, scan, atau laporan. Keputusan mengikat ada di [`docs/plan/0
 
 ## Stack
 
-Go 1.24 (chi, pgx/v5, golang-migrate, sqlc, log/slog) · PostgreSQL 17 ·
+Go 1.26 (chi, pgx/v5, golang-migrate, sqlc, log/slog) · PostgreSQL 17 ·
 React 19 + Vite + TypeScript + TanStack Query · pnpm · Docker Compose + Caddy di VPS.
 **Tanpa API gateway**; Caddy hanya TLS/header/body limit/reverse proxy/static SPA.
 
