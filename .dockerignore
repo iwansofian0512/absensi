@@ -13,3 +13,6 @@ deploy/backups
 *.dump
 context-pack.md
 external-context.md
+.env
+.env.local
+.env.*.local
